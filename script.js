@@ -43,7 +43,14 @@
     const service = serviceSelect?.value || 'project';
     const postcode = document.querySelector('#postcode')?.value.trim() || '';
     response.hidden = false;
-    response.innerHTML = `Your ${service.toLowerCase()} brief for ${postcode} is ready on this page. This concept does not send it anywhere. To discuss a site visit, call <a href="tel:+447906582289">+44 7906 582289</a>.`;
-    response.focus?.();
+    const phoneLink = document.createElement('a');
+    phoneLink.href = 'tel:+447906582289';
+    phoneLink.textContent = '+44 7906 582289';
+    response.replaceChildren(
+      document.createTextNode(`Your ${service.toLowerCase()} brief for ${postcode} is ready on this page. This concept does not send it anywhere. To discuss a site visit, call `),
+      phoneLink,
+      document.createTextNode('.'),
+    );
+    response.focus();
   });
 })();
